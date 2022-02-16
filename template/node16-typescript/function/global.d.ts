@@ -10,6 +10,6 @@ type FaasHandlerEvent = {
 
 type FaasHandlerContext = {
   status: (statusCode: number) => FaasHandlerContext
-  succeed: (result: string) => FaasHandlerContext
-  fail: (result: string) => FaasHandlerContext
+  succeed: (result?: string) => FaasHandlerContext
+  fail: (result?: string) => FaasHandlerContext
 }
