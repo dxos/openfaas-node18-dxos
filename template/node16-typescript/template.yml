@@ -1,4 +1,4 @@
-language: node16
+language: node16-typescript
 fprocess: node index.js
 welcome_message: |
   You have created a new function which uses Node.js 16 (LTS) and the OpenFaaS
