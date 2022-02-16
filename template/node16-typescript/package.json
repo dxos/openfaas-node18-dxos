@@ -7,7 +7,7 @@
     "test": "echo \"Error: no tests specified\" && exit 0"
   },
   "keywords": [],
-  "author": "Paweł Otto <pawelotto@protonmail.com>",
+  "author": "Paweł Otto",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
