@@ -1,5 +1,5 @@
 # openfaas-node16-typescript
-The **OpenFaas template** with Node 16 and TypeScript support and event handler types.
+The **OpenFaas template** with Node 16 and TypeScript support and handler function types.
 
 ## How to install this template
 1. Run `faas-cli template pull https://github.com/pawelotto/openfaas-node16-typescript`
