@@ -8,6 +8,12 @@ The **OpenFaas template** with Node 16 and TypeScript support and handler functi
 4. Edit the `<your_function_name>.yml` file: 
 - add `/dist` at the end of the handler entry because that's where your output handler.js file will be built to
 - specify your Docker repo in the `image` yaml entry
+
+If you're using a private Docker repo make sure to add your secret to the openfaas cluster by running `faas-cli secret create my-secret-api-key --from-file=my-secret-api-key.txt` and specify it in yaml entry:
+```
+secrets:
+  - my-secret-api-key
+```
 5. Chdir to `<your_function_name>` and run `yarn` to install dependencies
 6. Edit `<your_function_name>/src/handler.ts` to match your needs
 7. Run `yarn faas:build` to compile ts sources and copy package.json file
