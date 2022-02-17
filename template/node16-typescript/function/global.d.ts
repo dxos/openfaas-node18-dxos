@@ -1,4 +1,4 @@
-type Props = { [k in string]: string }
+type Props = { [k in string]?: string }
 
 type FaasHandlerEvent = {
   body: any
