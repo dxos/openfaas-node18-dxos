@@ -1,6 +1,9 @@
 # openfaas-node16-typescript
 The **OpenFaas template** with Node 16 and TypeScript support and handler function types.
 
+## Install faas-cli
+In order to run this template you need to install openfaas and faas-cli. Instructions here: https://docs.openfaas.com/cli/install/
+
 ## How to install this template
 1. Run `faas-cli template pull https://github.com/pawelotto/openfaas-node16-typescript`
 2. Run `faas-cli new --list` to verify the template has been added as `node16-typescript` language
