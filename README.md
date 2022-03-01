@@ -15,4 +15,4 @@ If you're using a private Docker repo make sure to add your secret to the openfa
 5. Chdir to `<your_function_name>` and run `yarn` to install dependencies
 6. Edit `<your_function_name>/src/handler.ts` to match your needs
 7. Run `yarn faas:build` to compile ts sources and copy package.json file
-8. Chdir up to main dir and run `faas-cli up -f <your_function_name>` to build, push and deploy your function
+8. Chdir up to main dir and run `faas-cli up -f <your_function_name>.yml` to build, push and deploy your function
