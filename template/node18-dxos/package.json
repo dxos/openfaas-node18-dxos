@@ -1,0 +1,16 @@
+{
+  "name": "openfaas-node16-typescript",
+  "version": "1.0.0",
+  "description": "The OpenFaas template with Node 16 and TypeScript support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no tests specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": "Paweł Otto (https://github.com/pawelotto)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
