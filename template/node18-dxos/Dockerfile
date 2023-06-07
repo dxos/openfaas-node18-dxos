@@ -1,5 +1,5 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/of-watchdog:0.9.2 as watchdog
-FROM --platform=${TARGETPLATFORM:-linux/amd64} node:16-alpine as ship
+FROM --platform=${TARGETPLATFORM:-linux/amd64} node:18-alpine as ship
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -7,7 +7,7 @@ ARG BUILDPLATFORM
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
-RUN apk --no-cache add curl ca-certificates \
+RUN apk --no-cache add curl ca-certificates alpine-sdk python3 libsodium-dev \
     && addgroup -S app && adduser -S -g app app
 
 # Turn down the verbosity to default level.
