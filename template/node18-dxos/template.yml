@@ -1,7 +1,7 @@
-language: node16-typescript
+language: node18-dxos
 fprocess: node index.js
 welcome_message: |
-  You have created a new function which uses Node.js 16 (LTS) and the OpenFaaS
+  You have created a new function which uses Node.js 18 (LTS) and the OpenFaaS
   of-watchdog which gives greater control over HTTP responses.
 
   npm i --save can be used to add third-party packages like request or cheerio
@@ -9,4 +9,3 @@ welcome_message: |
 
   Unit tests are run at build time via "npm run", edit package.json to specify 
   how you want to execute them.
-

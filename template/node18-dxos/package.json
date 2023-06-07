@@ -1,13 +1,12 @@
 {
-  "name": "openfaas-node16-typescript",
+  "name": "@dxos/openfaas-node18-dxos",
   "version": "1.0.0",
-  "description": "The OpenFaas template with Node 16 and TypeScript support",
+  "description": "The OpenFaas template with Node 18 and TypeScript support for DXOS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no tests specified\" && exit 0"
   },
   "keywords": [],
-  "author": "Paweł Otto (https://github.com/pawelotto)",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
