@@ -40,6 +40,8 @@ RUN npm i
 # COPY function files and folders
 COPY function/ ./
 
+RUN npm run build
+
 # Run any tests that may be available
 RUN npm test
 
