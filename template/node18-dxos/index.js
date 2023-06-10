@@ -55,9 +55,10 @@ class FunctionEvent {
 }
 
 class FunctionContext {
-  constructor(cb) {
+  constructor(cb, client) {
     this.statusCode = 200;
     this.cb = cb;
+    this.client = client;
     this.headerValues = {};
     this.cbCalled = 0;
   }
@@ -121,7 +122,6 @@ const middleware = async (req, res) => {
   };
 
   const fnEvent = new FunctionEvent(req);
-  const fnContext = new FunctionContext(cb);
 
   console.log('invoking function:', JSON.stringify(fnEvent?.body));
   const clientUrl = fnEvent?.body?.context?.clientUrl;
@@ -134,10 +134,8 @@ const middleware = async (req, res) => {
   // TODO(burdon): Client API to trigger function.
   const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
   await client.initialize();
-  console.log('client initialized:', client.halo.identity.get().identityKey.toHex());
-
-  // DXOS event.
-  fnEvent.client = client;
+  console.log('client initialized:', client);
+  const fnContext = new FunctionContext(cb, client);
 
   Promise.resolve(handler(fnEvent, fnContext, cb))
     .then((res) => {
