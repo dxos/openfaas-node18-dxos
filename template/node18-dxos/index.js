@@ -123,6 +123,7 @@ const middleware = async (req, res) => {
   const fnEvent = new FunctionEvent(req);
   const fnContext = new FunctionContext(cb);
 
+  console.log('invoking function:', JSON.stringify(fnEvent?.body));
   const clientUrl = fnEvent?.body?.context?.clientUrl;
   if (!clientUrl) {
     cb(new Error('Client socket URL not set.'));
@@ -130,11 +131,14 @@ const middleware = async (req, res) => {
   }
 
   // TOOD(burdon): Client config.
+  // TODO(burdon): Client API to trigger function.
   const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
   await client.initialize();
-  console.log('### client initialized', clientUrl, JSON.stringify(client.config));
+  console.log('client initialized:', client.halo.identity.get().identityKey.toHex());
 
-  // TODO(burdon): Client API to trigger function.
+  // DXOS event.
+  fnEvent.client = client;
+
   Promise.resolve(handler(fnEvent, fnContext, cb))
     .then((res) => {
       if (!fnContext.cbCalled) {
