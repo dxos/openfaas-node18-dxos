@@ -125,15 +125,16 @@ const middleware = async (req, res) => {
 
   const clientUrl = fnEvent?.body?.context?.clientUrl;
   if (!clientUrl) {
-    cb(new Error());
+    cb(new Error('Client socket URL not set.'));
     return;
   }
 
   // TOOD(burdon): Client config.
   const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
   await client.initialize();
-  console.log('### client initialized', JSON.stringify(client.config));
+  console.log('### client initialized', clientUrl, JSON.stringify(client.config));
 
+  // TODO(burdon): Client API to trigger function.
   Promise.resolve(handler(fnEvent, fnContext, cb))
     .then((res) => {
       if (!fnContext.cbCalled) {
@@ -155,5 +156,5 @@ app.options("/*", middleware);
 const port = process.env.http_port || 3000;
 
 app.listen(port, () => {
-  console.log(`node14 listening on port: ${port}`);
+  console.log(`node18 listening on port: ${port}`);
 });
