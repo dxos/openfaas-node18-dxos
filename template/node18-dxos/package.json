@@ -9,6 +9,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "@dxos/client": "0.1.45",
     "body-parser": "^1.18.2",
     "express": "^4.16.2"
   }
