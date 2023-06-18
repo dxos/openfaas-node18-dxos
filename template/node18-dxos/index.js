@@ -102,7 +102,6 @@ const middleware = async (req, res) => {
   const cb = (err, functionResult) => {
     if (err) {
       console.error(err);
-
       return res
         .status(fnContext.status())
         .send(err.toString ? err.toString() : err);
@@ -121,31 +120,36 @@ const middleware = async (req, res) => {
     }
   };
 
-  const fnEvent = new FunctionEvent(req);
+  try {
+    const fnEvent = new FunctionEvent(req);
+    console.log('invoking function:', JSON.stringify(fnEvent?.body));
 
-  console.log('invoking function:', JSON.stringify(fnEvent?.body));
-  const clientUrl = fnEvent?.body?.context?.clientUrl;
-  if (!clientUrl) {
-    cb(new Error('Client socket URL not set.'));
-    return;
+    // TODO(burdon): Client config.
+    const clientUrl = fnEvent?.body?.context?.clientUrl; // TODO(burdon): clientSocket.
+    console.log('000', clientUrl);
+    const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
+    console.log('111');
+    await client.initialize();
+
+    console.log('client initialized:', client);
+    const fnContext = new FunctionContext(cb, client);
+    console.log('222');
+    const res = await handler(fnEvent, fnContext, cb);
+    console.log('333');
+    if (!fnContext.cbCalled) {
+      fnContext.succeed(res);
+    }
+
+    // Promise.resolve(handler(fnEvent, fnContext, cb)).then((res) => {
+    //   if (!fnContext.cbCalled) {
+    //     fnContext.succeed(res);
+    //   }
+    // }).catch((e) => {
+    //   cb(e);
+    // });
+  } catch (e) {
+    cb(e);
   }
-
-  // TOOD(burdon): Client config.
-  // TODO(burdon): Client API to trigger function.
-  const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
-  await client.initialize();
-  console.log('client initialized:', client);
-  const fnContext = new FunctionContext(cb, client);
-
-  Promise.resolve(handler(fnEvent, fnContext, cb))
-    .then((res) => {
-      if (!fnContext.cbCalled) {
-        fnContext.succeed(res);
-      }
-    })
-    .catch((e) => {
-      cb(e);
-    });
 };
 
 app.post("/*", middleware);
