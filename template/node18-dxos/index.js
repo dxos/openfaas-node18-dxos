@@ -9,7 +9,7 @@ const app = express();
 const handler = require("./function/dist/handler");
 const bodyParser = require("body-parser");
 
-const { Client, Config, fromSocket } = require('@dxos/client');
+// const { Client, Config, fromSocket } = require('@dxos/client');
 
 const defaultMaxSize = "100kb"; // body-parser default
 
