@@ -55,7 +55,7 @@ class FunctionEvent {
 }
 
 class FunctionContext {
-  constructor(cb, client) {
+  constructor(cb, client = undefined) {
     this.statusCode = 200;
     this.cb = cb;
     this.client = client;
@@ -125,14 +125,15 @@ const middleware = async (req, res) => {
     console.log('invoking function:', JSON.stringify(fnEvent?.body));
 
     // TODO(burdon): Client config.
-    const clientUrl = fnEvent?.body?.context?.clientUrl; // TODO(burdon): clientSocket.
-    console.log('000', clientUrl);
-    const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
-    console.log('111');
-    await client.initialize();
+    // const clientUrl = fnEvent?.body?.context?.clientUrl; // TODO(burdon): clientSocket.
+    // console.log('000', clientUrl);
+    // const client = new Client({ config: new Config({}), services: fromSocket(clientUrl) });
+    // console.log('111');
+    // await client.initialize();
 
-    console.log('client initialized:', client);
-    const fnContext = new FunctionContext(cb, client);
+    // console.log('client initialized:', client);
+    // const fnContext = new FunctionContext(cb, client);
+    const fnContext = new FunctionContext(cb);
     console.log('222');
     const res = await handler(fnEvent, fnContext, cb);
     console.log('333');
